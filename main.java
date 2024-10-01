@@ -254,7 +254,7 @@ interface Package {
 }
 
 class BasicPackage implements Package {
-    Builder builder;
+    TicketingSystemBuilder builder;
 
     public BasicPackage(InternetConnection internetConnection, WebServer webServer) {
         builder = new TicketingSystemBuilder();
@@ -275,7 +275,7 @@ class BasicPackage implements Package {
 }
 
 class StandardPackage implements Package {
-    Builder builder;
+    TicketingSystemBuilder builder;
 
     public StandardPackage(InternetConnection internetConnection, WebServer webServer) {
         builder = new TicketingSystemBuilder();
@@ -296,7 +296,7 @@ class StandardPackage implements Package {
 }
 
 class AdvancedPackage implements Package {
-    Builder builder;
+    TicketingSystemBuilder builder;
 
     public AdvancedPackage(InternetConnection internetConnection, WebServer webServer) {
         builder = new TicketingSystemBuilder();
@@ -317,7 +317,7 @@ class AdvancedPackage implements Package {
 }
 
 class PremiumPackage implements Package {
-    Builder builder;
+    TicketingSystemBuilder builder;
 
     public PremiumPackage(InternetConnection internetConnection, WebServer webServer) {
         builder = new TicketingSystemBuilder();
@@ -380,6 +380,7 @@ public class main {
                 break;
             default:
                 System.out.println("Invalid connection type");
+                scanner.close();
                 return;
         }
 
