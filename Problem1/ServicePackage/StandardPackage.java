@@ -1,4 +1,4 @@
-package Package;
+package ServicePackage;
 import Controller.*;
 import InternetConnection.*;
 import Display.*;
@@ -8,13 +8,14 @@ import WebServer.*;
 import Ticketing.*;
 import Storage.*;
 
-public class StandardPackage implements Package {
+public class StandardPackage implements ServicePackage {
     TicketingSystemBuilder builder;
 
     public StandardPackage(InternetConnection internetConnection, WebServer webServer) {
         builder = new TicketingSystemBuilder();
-        builder.setMicrocontroller(new ATMega32());
-        builder.setDisplay(new LCD());
+        builder.setMicrocontroller(new ArduinoMega());
+        builder.setDisplay(new LED());
+        
         builder.setIdentification(new RFID());
         builder.setPaymentTerminal(new PaymentTerminal());
         builder.setInternetConnection(internetConnection);

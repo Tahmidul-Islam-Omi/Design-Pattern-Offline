@@ -1,5 +1,9 @@
-class PackageFactory {
-    public static Package createPackage(String packageType, InternetConnection internetConnection,
+package ServicePackage;
+import InternetConnection.InternetConnection;
+import WebServer.WebServer;
+
+public class PackageFactory {
+    public static ServicePackage createPackage(String packageType, InternetConnection internetConnection,
             WebServer webServer) {
         switch (packageType) {
             case "Basic":

@@ -1,4 +1,4 @@
-package Package;
+package ServicePackage;
 import Controller.*;
 import InternetConnection.*;
 import Display.*;
@@ -8,18 +8,18 @@ import WebServer.*;
 import Ticketing.*;
 import Storage.*;
 
-public class AdvancedPackage implements Package {
+public class AdvancedPackage implements ServicePackage {
     TicketingSystemBuilder builder;
 
     public AdvancedPackage(InternetConnection internetConnection, WebServer webServer) {
         builder = new TicketingSystemBuilder();
-        builder.setMicrocontroller(new ATMega32());
-        builder.setDisplay(new LCD());
-        builder.setIdentification(new RFID());
+        builder.setMicrocontroller(new RaspberryPi());
+        builder.setDisplay(new OLED());
+        builder.setIdentification(new NFC());
         builder.setPaymentTerminal(new PaymentTerminal());
         builder.setInternetConnection(internetConnection);
-        builder.setStorage(new SDCard());
-        builder.setController(new ExternalController());
+        builder.setStorage(new InternalStorage());
+        builder.setController(new TouchScreenController());
         builder.setWebServer(webServer);
     }
 

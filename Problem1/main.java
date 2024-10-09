@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import InternetConnection.*;
+import ServicePackage.*;
+import WebServer.*;
 
 public class main {
     public static void main(String[] args) {
@@ -49,14 +52,15 @@ public class main {
                 return;
         }
 
-        Package selectedPackage = PackageFactory.createPackage(packageType, internetConnection, webServer);
+        ServicePackage selectedPackage =  PackageFactory.createPackage(packageType, internetConnection, webServer);
 
         if (selectedPackage == null) {
             System.out.println("Invalid package type");
             return;
         }
 
+
         System.out.println("Package Details:");
-        selectedPackage.getDetails();
+        System.out.println(selectedPackage.getDetails());
     }
 }

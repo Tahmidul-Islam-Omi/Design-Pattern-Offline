@@ -1,11 +1,13 @@
 package Ticketing;
-import Controller.*;
-import InternetConnection.*;
-import Display.*;
-import Identification.*;
-import Microcontroller.*;
-import WebServer.*;
-import Storage.*;
+
+import Controller.Controller;
+import Display.Display;
+import Identification.Identification;
+import Identification.PaymentTerminal;
+import InternetConnection.InternetConnection;
+import Microcontroller.Microcontroller;
+import Storage.Storage;
+import WebServer.WebServer;
 
 public class TicketingSystem {
     private Microcontroller microcontroller;
@@ -34,6 +36,6 @@ public class TicketingSystem {
         return "Ticketing System with " + microcontroller.getDetails() + ", " + display.getDetails() + ", "
                 + identification.getDetails() + ", " + paymentTerminal.getDetails() + ", "
                 + internetConnection.getDetails() + ", " + storage.getDetails() + ", " + controller.getDetails() + ", "
-                + webServer;
+                + webServer.getDetails();
     }
 }

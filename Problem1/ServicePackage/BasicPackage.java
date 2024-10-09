@@ -1,4 +1,5 @@
-package Package;
+package ServicePackage;
+
 import Controller.*;
 import InternetConnection.*;
 import Display.*;
@@ -8,7 +9,7 @@ import WebServer.*;
 import Ticketing.*;
 import Storage.*;
 
-public class BasicPackage implements Package {
+public class BasicPackage implements ServicePackage {
     TicketingSystemBuilder builder;
 
     public BasicPackage(InternetConnection internetConnection, WebServer webServer) {

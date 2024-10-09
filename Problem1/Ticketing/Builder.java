@@ -1,11 +1,13 @@
 package Ticketing;
-import Controller.*;
-import InternetConnection.*;
-import Display.*;
-import Identification.*;
-import Microcontroller.*;
-import WebServer.*;
-import Storage.*;
+
+import Controller.Controller;
+import Display.Display;
+import Identification.Identification;
+import Identification.PaymentTerminal;
+import InternetConnection.InternetConnection;
+import Microcontroller.Microcontroller;
+import Storage.Storage;
+import WebServer.WebServer;
 
 public interface Builder {
     void setMicrocontroller(Microcontroller microcontroller);
