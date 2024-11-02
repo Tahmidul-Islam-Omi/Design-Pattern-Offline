@@ -1,25 +1,23 @@
-public class FoodItem implements RestaurantInterface{
+public class FoodItem implements RestaurantInterface {
+    private final String name;
+    private final int price;
 
-    private String FoodItemName;
-    private int FoodItemPrice;
-
-    FoodItem(String FoodItemName, int FoodItemPrice) {
-        this.FoodItemName = FoodItemName;
-        this.FoodItemPrice = FoodItemPrice;
+    public FoodItem(String name, int price) {
+        this.name = name;
+        this.price = price;
     }
+    @Override
     public void menuDetails() {
-        if (FoodItemPrice == 0) {
-            System.out.println(FoodItemName + " (Free!!!)");
-        } else {
-            System.out.println(FoodItemName + " - " + FoodItemPrice);
-        }
+        String priceDisplay = (price == 0) ? "Free" : String.valueOf(price);
+        System.out.println(name + " - " + priceDisplay);
     }
 
-    public String getFoodName() {
-        return FoodItemName;
-    }
-
+    @Override
     public int getCost() {
-        return FoodItemPrice;
+        return price;
+    }
+
+    public String getName() {
+        return name;
     }
 }

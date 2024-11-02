@@ -1,4 +1,4 @@
 public interface RestaurantInterface {
-    public void menuDetails();
-    public int getCost();
+    void menuDetails();
+    int getCost();
 }

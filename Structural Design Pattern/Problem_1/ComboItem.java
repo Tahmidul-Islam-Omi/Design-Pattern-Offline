@@ -1,14 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class ComboItem implements RestaurantInterface{
-    private String ComboName;
-    private List<RestaurantInterface> foodItemList = new ArrayList<>();
-    private int discountAmount = 0;
+public class ComboItem implements RestaurantInterface {
+    private final String comboName;
+    private final List<RestaurantInterface> foodItemList;
+    private int discountPercentage;
     
-
-    public ComboItem(String ComboName) {
-        this.ComboName = ComboName;
+    public ComboItem(String comboName) {
+        this.comboName = comboName;
+        this.foodItemList = new ArrayList<>();
+        this.discountPercentage = 0;
     }
 
     public void addFoodItem(RestaurantInterface FoodItem) {
@@ -19,16 +20,12 @@ public class ComboItem implements RestaurantInterface{
         foodItemList.remove(FoodItem);
     }
 
-    public void applyDiscount(int discountAmount) {
-        this.discountAmount = discountAmount;
-    }
-
-    public void setDiscount(int discountAmount) {
-        this.discountAmount = discountAmount;
+    public void setDiscount(int discountPercentage) {
+        this.discountPercentage = discountPercentage;
     }
 
     public String getComboName() {
-        return ComboName;
+        return comboName;
     }
 
     public List<RestaurantInterface> getFoodList() {
@@ -36,24 +33,25 @@ public class ComboItem implements RestaurantInterface{
     }
 
     public void menuDetails() {
-        System.out.println(ComboName + ":- ");
-
-        for(RestaurantInterface combo: foodItemList) {
-            combo.menuDetails();
-        }
+        System.out.println(comboName + ":- ");
+        
+        foodItemList.forEach(RestaurantInterface::menuDetails);
         
         int totalCost = getCost();
-
         System.out.println("Total Cost: " + totalCost);
 
-        if(discountAmount > 0) {
-            System.out.println("Discount " + discountAmount +"%");
-            System.out.println("Discounted Cost: " + (totalCost - (totalCost * discountAmount / 100)));
+        if(discountPercentage > 0) {
+            System.out.println("Discount: " + discountPercentage + "%");
+            int discountedCost = calculateDiscountedCost(totalCost);
+            System.out.println("Discounted Cost: " + discountedCost);
         }
     }
 
-    public int getCost() {
+    private int calculateDiscountedCost(int totalCost) {
+        return totalCost - (totalCost * discountPercentage / 100);
+    }
 
+    public int getCost() {
         int totalCost = 0;
         for(RestaurantInterface combo: foodItemList) {
             totalCost += combo.getCost();
@@ -61,5 +59,4 @@ public class ComboItem implements RestaurantInterface{
 
         return totalCost;
     }
-    
 }

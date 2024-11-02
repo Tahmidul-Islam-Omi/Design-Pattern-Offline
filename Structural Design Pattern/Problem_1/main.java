@@ -114,7 +114,7 @@ public class main {
                             if(food instanceof FoodItem) {
                                 count++;
                                 if(count == itemNo) {
-                                    FoodItem freeItem = new FoodItem(((FoodItem)food).getFoodName(), 0);
+                                    FoodItem freeItem = new FoodItem(((FoodItem)food).getName(), 0);
                                     combo.addFoodItem(freeItem);
                                     break;
                                 }
