@@ -26,105 +26,109 @@ public class main {
         comboItem2.addFoodItem(foodItem4);
         comboItem2.addFoodItem(foodItem5);
 
-        restaurant.addCombo(comboItem1);
-        restaurant.addCombo(comboItem2);
-        
-        List<RestaurantInterface> foodList = restaurant.getFoodList();
-        List<RestaurantInterface> comboList = restaurant.getComboList();
+        restaurant.addFood(comboItem1);
+        restaurant.addFood(comboItem2);
 
-        while (true) {
-            System.out.println("Press 1 to create a combo, 2 to view menu and 0 to exit.");
-
-            Scanner scanner = new Scanner(System.in);
-            int number = scanner.nextInt();
-
-            if(number == 0) {
-                break;
-            }
-
-            else if(number == 1) {
-                System.out.print("Enter the name of the combo: ");
-                String comboname = scanner.nextLine();
-                ComboItem combo = new ComboItem(comboname);
-
-                while(true) {
-                    System.out.println("Available Commands: ");
-                    System.out.println("1.Add[item]");
-                    System.out.println("2.Remove[item]");
-                    System.out.println("3.Free[item]");
-                    System.out.println("4.Discount[percentage]");
-                    System.out.println("5.Done");
-
-                    System.out.print("Press between 1 to 5: ");
-
-                    int commandNum = scanner.nextInt();
-
-                    if(commandNum == 1) {
-                        System.out.print("Add ");
-                        String item = scanner.nextLine();
-
-                        for(RestaurantInterface food: foodList) {
-                            if(((FoodItem)food).getFoodName().equals(item)) {
-                                combo.addFoodItem(food);
-                                break;
-                            }
-                        }
-
-                        for(RestaurantInterface comboItem: comboList) {
-                            if(((ComboItem)comboItem).getComboName().equals(item)) {
-                                combo.addFoodItem(comboItem);
-                                break;
-                            }
-                        }
-                        
-                    }
-
-                    if(commandNum == 2) {
-                        String item = scanner.nextLine();
-
-                        for(RestaurantInterface comboItem: combo.getFoodList()) {
-                            if(((ComboItem)comboItem).getComboName().equals(item)) {
-                                combo.removeFoodItem(comboItem);
-                                break;
-                            }
-                        }
-                    }
-
-                    if(commandNum == 3) {
-                        String item = scanner.nextLine();
-                        for(RestaurantInterface food: foodList) {
-                            if(((FoodItem)food).getFoodName().equals(item)) {
-                                combo.addFoodItem(food);
-                                break;
-                            }
-                        }
-                    }
-
-                    if(commandNum == 4) {
-                        int amount = scanner.nextInt();
-                        combo.setDiscount(amount);
-                    }
-
-                    if(commandNum == 5) {
-                        restaurant.addCombo(combo);
-                    }
-                }
-            }
-
-            else if(number == 2) {
-                for(RestaurantInterface food: foodList) {
-                    food.menuDetails();
-                }
-
-                for(RestaurantInterface combo: comboList) {
-                    combo.menuDetails();
-                }
-            }
-            
-            scanner.close();
-        }
-
-
-
+        restaurant.menuDetails();
     }
 }
+        
+//         List<RestaurantInterface> foodList = restaurant.getFoodList();
+//         List<RestaurantInterface> comboList = restaurant.getComboList();
+
+//         while (true) {
+//             System.out.println("Press 1 to create a combo, 2 to view menu and 0 to exit.");
+
+//             Scanner scanner = new Scanner(System.in);
+//             int number = scanner.nextInt();
+
+//             if(number == 0) {
+//                 break;
+//             }
+
+//             else if(number == 1) {
+//                 System.out.print("Enter the name of the combo: ");
+//                 String comboname = scanner.nextLine();
+//                 ComboItem combo = new ComboItem(comboname);
+
+//                 while(true) {
+//                     System.out.println("Available Commands: ");
+//                     System.out.println("1.Add[item]");
+//                     System.out.println("2.Remove[item]");
+//                     System.out.println("3.Free[item]");
+//                     System.out.println("4.Discount[percentage]");
+//                     System.out.println("5.Done");
+
+//                     System.out.print("Press between 1 to 5: ");
+
+//                     int commandNum = scanner.nextInt();
+
+//                     if(commandNum == 1) {
+//                         System.out.print("Add ");
+//                         String item = scanner.nextLine();
+
+//                         for(RestaurantInterface food: foodList) {
+//                             if(((FoodItem)food).getFoodName().equals(item)) {
+//                                 combo.addFoodItem(food);
+//                                 break;
+//                             }
+//                         }
+
+//                         for(RestaurantInterface comboItem: comboList) {
+//                             if(((ComboItem)comboItem).getComboName().equals(item)) {
+//                                 combo.addFoodItem(comboItem);
+//                                 break;
+//                             }
+//                         }
+                        
+//                     }
+
+//                     if(commandNum == 2) {
+//                         String item = scanner.nextLine();
+
+//                         for(RestaurantInterface comboItem: combo.getFoodList()) {
+//                             if(((ComboItem)comboItem).getComboName().equals(item)) {
+//                                 combo.removeFoodItem(comboItem);
+//                                 break;
+//                             }
+//                         }
+//                     }
+
+//                     if(commandNum == 3) {
+//                         String item = scanner.nextLine();
+//                         for(RestaurantInterface food: foodList) {
+//                             if(((FoodItem)food).getFoodName().equals(item)) {
+//                                 combo.addFoodItem(food);
+//                                 break;
+//                             }
+//                         }
+//                     }
+
+//                     if(commandNum == 4) {
+//                         int amount = scanner.nextInt();
+//                         combo.setDiscount(amount);
+//                     }
+
+//                     if(commandNum == 5) {
+//                         restaurant.addCombo(combo);
+//                     }
+//                 }
+//             }
+
+//             else if(number == 2) {
+//                 for(RestaurantInterface food: foodList) {
+//                     food.menuDetails();
+//                 }
+
+//                 for(RestaurantInterface combo: comboList) {
+//                     combo.menuDetails();
+//                 }
+//             }
+            
+//             scanner.close();
+//         }
+
+
+
+//     }
+// }

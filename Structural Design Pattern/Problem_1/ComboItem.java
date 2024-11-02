@@ -4,8 +4,9 @@ import java.util.List;
 public class ComboItem implements RestaurantInterface{
     private String ComboName;
     private List<RestaurantInterface> foodItemList = new ArrayList<>();
-    private List<RestaurantInterface> FreeItemList = new ArrayList<>();
+    // private List<RestaurantInterface> FreeItemList = new ArrayList<>();
     private int discountAmount = 0;
+    
 
     public ComboItem(String ComboName) {
         this.ComboName = ComboName;
@@ -19,9 +20,9 @@ public class ComboItem implements RestaurantInterface{
         foodItemList.remove(FoodItem);
     }
 
-    public void addFreeItem(RestaurantInterface FoodItem) {
-        FreeItemList.add(FoodItem);
-    }
+    // public void addFreeItem(RestaurantInterface FoodItem) {
+    //     FreeItemList.add(FoodItem);
+    // }
 
     public void applyDiscount(int discountAmount) {
         this.discountAmount = discountAmount;
@@ -41,17 +42,25 @@ public class ComboItem implements RestaurantInterface{
 
     public void menuDetails() {
         System.out.println(ComboName + ": ");
+        
+        int totalCost = getCost();
+
+        System.out.println("Total Cost: " + totalCost);
+
+        if(discountAmount > 0) {
+            System.out.println("Discount " + discountAmount +"%");
+            System.out.println("Discounted Cost: " + (totalCost - (totalCost * discountAmount / 100)));
+        }
+    }
+
+    public int getCost() {
+        int totalCost = 0;
         for(RestaurantInterface combo: foodItemList) {
             combo.menuDetails();
+            totalCost += combo.getCost();
         }
 
-        System.out.println("Free Items:-");
-        for(RestaurantInterface freeItem: FreeItemList) {
-            freeItem.menuDetails();
-        }
-
-        System.out.println("Discount " + discountAmount +"%");
-
+        return totalCost;
     }
     
 }

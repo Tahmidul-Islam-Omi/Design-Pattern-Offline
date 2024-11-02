@@ -14,4 +14,8 @@ public class FoodItem implements RestaurantInterface{
     public String getFoodName() {
         return FoodItemName;
     }
+
+    public int getCost() {
+        return FoodItemPrice;
+    }
 }
