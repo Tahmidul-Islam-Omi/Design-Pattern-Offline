@@ -93,18 +93,12 @@ public class main {
                         System.out.println("Enter the Food No you want to Remove: ");
                         int itemNo = scanner.nextInt();
 
-                        combo.removeFoodItem(foodList.get(itemNo-1));
+                        combo.removeFoodItem(combo.getFoodList().get(itemNo-1));
                     }
 
-                    // if(commandNum == 3) {
-                    //     String item = scanner.nextLine();
-                    //     for(RestaurantInterface food: foodList) {
-                    //         if(((FoodItem)food).getFoodName().equals(item)) {
-                    //             combo.addFoodItem(food);
-                    //             break;
-                    //         }
-                    //     }
-                    // }
+                    if(commandNum == 3) {
+                        
+                    }
 
                     if(commandNum == 4) {
                         System.out.print("Enter the discount percentage: ");

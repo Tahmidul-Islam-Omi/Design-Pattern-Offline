@@ -4,7 +4,6 @@ import java.util.List;
 public class ComboItem implements RestaurantInterface{
     private String ComboName;
     private List<RestaurantInterface> foodItemList = new ArrayList<>();
-    // private List<RestaurantInterface> FreeItemList = new ArrayList<>();
     private int discountAmount = 0;
     
 
@@ -19,10 +18,6 @@ public class ComboItem implements RestaurantInterface{
     public void removeFoodItem(RestaurantInterface FoodItem) {
         foodItemList.remove(FoodItem);
     }
-
-    // public void addFreeItem(RestaurantInterface FoodItem) {
-    //     FreeItemList.add(FoodItem);
-    // }
 
     public void applyDiscount(int discountAmount) {
         this.discountAmount = discountAmount;
