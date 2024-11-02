@@ -97,7 +97,29 @@ public class main {
                     }
 
                     if(commandNum == 3) {
+                        int i=1;
+                        for(RestaurantInterface food: foodList) {
+                            if(food instanceof FoodItem) {
+                                System.out.println(i + ".");
+                                food.menuDetails();
+                                i++;
+                            }
+                        }
+
+                        System.out.println("Enter the Food No you want to add as free: ");
+                        int itemNo = scanner.nextInt();
                         
+                        int count = 0;
+                        for(RestaurantInterface food: foodList) {
+                            if(food instanceof FoodItem) {
+                                count++;
+                                if(count == itemNo) {
+                                    FoodItem freeItem = new FoodItem(((FoodItem)food).getFoodName(), 0);
+                                    combo.addFoodItem(freeItem);
+                                    break;
+                                }
+                            }
+                        }
                     }
 
                     if(commandNum == 4) {
@@ -121,8 +143,8 @@ public class main {
             else if(number == 2) {
                 for(RestaurantInterface food: foodList) {
                     food.menuDetails();
-                    System.out.println();
                 }
+                System.out.println();
             }
             
         }

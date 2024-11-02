@@ -8,7 +8,11 @@ public class FoodItem implements RestaurantInterface{
         this.FoodItemPrice = FoodItemPrice;
     }
     public void menuDetails() {
-        System.out.println(FoodItemName + " - " + FoodItemPrice);
+        if (FoodItemPrice == 0) {
+            System.out.println(FoodItemName + " (Free!!!)");
+        } else {
+            System.out.println(FoodItemName + " - " + FoodItemPrice);
+        }
     }
 
     public String getFoodName() {
