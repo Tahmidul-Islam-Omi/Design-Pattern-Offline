@@ -41,7 +41,11 @@ public class ComboItem implements RestaurantInterface{
     }
 
     public void menuDetails() {
-        System.out.println(ComboName + ": ");
+        System.out.println(ComboName + ":- ");
+
+        for(RestaurantInterface combo: foodItemList) {
+            combo.menuDetails();
+        }
         
         int totalCost = getCost();
 
@@ -54,9 +58,9 @@ public class ComboItem implements RestaurantInterface{
     }
 
     public int getCost() {
+
         int totalCost = 0;
         for(RestaurantInterface combo: foodItemList) {
-            combo.menuDetails();
             totalCost += combo.getCost();
         }
 
