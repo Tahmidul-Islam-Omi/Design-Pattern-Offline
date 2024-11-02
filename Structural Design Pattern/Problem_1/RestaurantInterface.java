@@ -1,3 +1,3 @@
 public interface RestaurantInterface {
-    public void menuDetails(String FootItem , int price);
+    public void menuDetails();
 }
