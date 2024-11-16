@@ -1,3 +1,5 @@
+import javax.swing.undo.CompoundEdit;
+
 interface Component {
     double getPrice();
 
@@ -93,7 +95,7 @@ class PerformanceBoostDecorator extends Decorator {
     }
 }
 
-public class main {
+public class 2105115 {
     public static void main(String[] args) {
         
         Component cpu = new HardwareComponent("CPU", 300.0);
