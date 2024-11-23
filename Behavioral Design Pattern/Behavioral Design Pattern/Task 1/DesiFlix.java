@@ -1,124 +1,106 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.Scanner;
 
-// Observer Interface
-interface Observer {
-    void update(String genre, String movie);
-}
-
-// Concrete Observer: User
-class User implements Observer {
-    private String name;
-    private List<String> favoriteGenres;
-
-    public User(String name) {
-        this.name = name;
-        this.favoriteGenres = new ArrayList<>();
-    }
-
-    public void addFavoriteGenre(String genre) {
-        if (!favoriteGenres.contains(genre)) {
-            favoriteGenres.add(genre);
-        }
-    }
-
-    public void removeFavoriteGenre(String genre) {
-        favoriteGenres.remove(genre);
-    }
-
-    public List<String> getFavoriteGenres() {
-        return favoriteGenres;
-    }
-
-    @Override
-    public void update(String genre, String movie) {
-        if (favoriteGenres.contains(genre)) {
-            System.out.println("Hello " + name + ", a new " + genre + " movie has been uploaded: " + movie);
-        }
-    }
-}
-
-// Subject Interface
-interface Subject {
-    void addSubscriber(Observer subscriber);
-    void removeSubscriber(Observer subscriber);
-    void notifySubscribers(String movie);
-}
-
-// ConcreteSubject Class
-class GenreNotifier implements Subject {
-    private String genreName;
-    private List<Observer> subscribers;
-    private ExecutorService executor;
-
-    public GenreNotifier(String genreName) {
-        this.genreName = genreName;
-        this.subscribers = new ArrayList<>();
-        this.executor = Executors.newCachedThreadPool(); // Use cached thread pool for dynamic task handling
-    }
-
-    public void addSubscriber(Observer subscriber) {
-        if (!subscribers.contains(subscriber)) {
-            subscribers.add(subscriber);
-        }
-    }
-
-    public void removeSubscriber(Observer subscriber) {
-        subscribers.remove(subscriber);
-    }
-
-    public void notifySubscribers(String movie) {
-        for (Observer subscriber : subscribers) {
-            executor.submit(() -> {
-                subscriber.update(genreName, movie);
-            });
-        }
-    }
-
-    // Ensure to shutdown executor to free resources
-    public void shutdownNotifier() {
-        executor.shutdown();
-    }
-}
-
-// Main Application
 public class DesiFlix {
     public static void main(String[] args) {
-        // Create Genre Notifiers
+
+        Scanner scanner = new Scanner(System.in);
+        
         GenreNotifier thrillerNotifier = new GenreNotifier("Thriller");
         GenreNotifier horrorNotifier = new GenreNotifier("Horror");
         GenreNotifier comedyNotifier = new GenreNotifier("Comedy");
 
-        // Create Users
-        User user1 = new User("Alice");
-        User user2 = new User("Bob");
-        User user3 = new User("Charlie");
+        User user1 = new User("Ishrak");
+        User user2 = new User("Omi");
+        User user3 = new User("Siam");
 
-        // Users subscribe to genres
-        user1.addFavoriteGenre("Thriller");
-        user1.addFavoriteGenre("Horror");
-        user2.addFavoriteGenre("Horror");
-        user2.addFavoriteGenre("Comedy");
-        user3.addFavoriteGenre("Comedy");
+        
+        Map<String, GenreNotifier> notifiers = new HashMap<>();
+        notifiers.put("Thriller", thrillerNotifier);
+        notifiers.put("Horror", horrorNotifier);
+        notifiers.put("Comedy", comedyNotifier);
 
-        thrillerNotifier.addSubscriber(user1);
-        horrorNotifier.addSubscriber(user1);
-        horrorNotifier.addSubscriber(user2);
-        comedyNotifier.addSubscriber(user2);
-        comedyNotifier.addSubscriber(user3);
+        Map<String, User> users = new HashMap<>();
+        users.put("Ishrak", user1);
+        users.put("Omi", user2);
+        users.put("Siam", user3);
 
-        // Notify users of new movies
-        thrillerNotifier.notifySubscribers("Inception");
-        horrorNotifier.notifySubscribers("The Conjuring");
-        comedyNotifier.notifySubscribers("The Hangover");
+        String input;
+        while (true) {
+            try {
+            Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            e.printStackTrace();
+            }
+            System.out.println("Enter command (add, update, remove, upload, exit):");
+            input = scanner.nextLine().toLowerCase();
 
-        // Shutdown notifiers (in a real application, this would be done on exit)
+            if (input.equals("exit")) {
+                break;
+            }
+
+            switch (input) {
+                case "add":
+                case "update":
+                case "remove":
+                    System.out.println("Enter user name:");
+                    String userName = scanner.nextLine();
+                    System.out.println("Enter genre (Thriller, Horror, Comedy):");
+                    String genre = scanner.nextLine();
+
+                    User user = users.get(userName);
+                    if (user == null) {
+                        System.out.println("User not found!");
+                        continue;
+                    }
+
+                    switch (input) {
+                        case "add":
+                            user.addFavoriteGenre(genre);
+                            notifiers.get(genre).addSubscriber(user);
+                            System.out.println( genre + " genre is added to favorites.");
+                            break;
+                        case "update":
+                            // Assuming update means changing preferences entirely
+                            System.out.println("Enter new favorite genres (comma separated):");
+                            String[] newGenres = scanner.nextLine().split(",");
+                            for (String g : user.getFavoriteGenres()) {
+                                notifiers.get(g).removeSubscriber(user);
+                            }
+                            user.getFavoriteGenres().clear();
+                            for (String g : newGenres) {
+                                user.addFavoriteGenre(g.trim());
+                                notifiers.get(g.trim()).addSubscriber(user);
+                            }
+                            System.out.println("Genres updated.");
+                            break;
+                        case "remove":
+                            user.removeFavoriteGenre(genre);
+                            notifiers.get(genre).removeSubscriber(user);
+                            System.out.println(genre + " Genre is removed from favorites.");
+                            break;
+                    }
+                    break;
+                case "upload":
+                    System.out.println("Enter genre (Thriller, Horror, Comedy):");
+                    String uploadGenre = scanner.nextLine();
+                    System.out.println("Enter movie name:");
+                    String movie = scanner.nextLine();
+                    notifiers.get(uploadGenre).notifySubscribers(movie);
+                    System.out.println("Movie uploaded and notifications sent.");
+                    break;
+                default:
+                    System.out.println("Invalid command!");
+            }
+        }
+
+        // Shutdown notifiers
         thrillerNotifier.shutdownNotifier();
         horrorNotifier.shutdownNotifier();
         comedyNotifier.shutdownNotifier();
+
+        scanner.close();
+        System.out.println("System exited.");
     }
 }
